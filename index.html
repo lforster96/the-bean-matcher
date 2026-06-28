@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Bean Matcher — Coming Soon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { min-height: 100vh; font-family: 'Hanken Grotesk', sans-serif; background: #f4ece2; color: #241c15; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+      0%   { opacity: 0; transform: scale(.82); }
+      60%  { transform: scale(1.06); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    input::placeholder { color: #a99b8c; }
+    input:focus, textarea:focus { outline: none; border-color: #6f4e37 !important; box-shadow: 0 0 0 3px rgba(111,78,55,0.12); }
+    textarea { resize: vertical; }
+    button { cursor: pointer; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.6fr;
+      align-items: stretch;
+      min-height: clamp(420px, 52vw, 560px);
+    }
+    .hero-pattern {
+      background: repeating-linear-gradient(135deg,#ece0d0,#ece0d0 11px,#e6d7c4 11px,#e6d7c4 22px);
+      display: flex; align-items: flex-end; justify-content: center;
+      padding: clamp(12px,2vw,30px); overflow: hidden; position: relative;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===================== SUPABASE CONFIG ===================== -->
+<script>
+  // ⚠️ REPLACE THESE TWO VALUES — Supabase → Project Settings → API
+  const SUPABASE_URL      = 'https://dqskezuvdzpxkueggnqd.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_wnGVmctMci8A4Lg7IJdawA_Fn7kr2C3';
+
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+</script>
+<!-- =========================================================== -->
+
+<div style="min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- HEADER -->
+  <header style="height:72px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 clamp(24px,5vw,48px);border-bottom:1px solid rgba(36,28,21,0.10);">
+    <div style="display:inline-flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:17px;letter-spacing:0.16em;text-transform:uppercase;color:#241c15;">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M6.5 13 H23 v5.5 a7 7 0 0 1 -7 7 h-2.5 a7 7 0 0 1 -7 -7 z" stroke="#241c15" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M23 14.5 h2.5 a3.5 3.5 0 0 1 0 7 H23" stroke="#241c15" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M12 4 q-2 2 0 4 M16 3.5 q-2 2 0 4 M20 4 q-2 2 0 4" stroke="#6f4e37" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      The Bean Matcher
+    </div>
+    <span style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#9a8a78;">Launching soon</span>
+  </header>
+
+  <main style="flex:1;display:flex;flex-direction:column;">
+
+    <!-- HERO -->
+    <section class="hero-grid">
+      <div style="display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,6vw,72px) clamp(20px,5vw,48px);animation:fadeUp .6s ease both;">
+        <span style="display:inline-flex;align-items:center;gap:9px;align-self:flex-start;background:rgba(111,78,55,0.08);border:1px solid rgba(111,78,55,0.22);border-radius:999px;padding:7px 15px;font-size:clamp(10px,1.6vw,12px);font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#6f4e37;margin-bottom:clamp(18px,2.6vw,28px);">
+          <span style="width:7px;height:7px;border-radius:50%;background:#6f4e37;display:inline-block;"></span>
+          Now in pre-launch
+        </span>
+        <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,5.2vw,72px);line-height:1.02;letter-spacing:-0.014em;color:#241c15;margin:0 0 clamp(16px,2.2vw,24px);max-width:15ch;text-wrap:balance;">The coffee made for your palate is coming.</h1>
+        <p style="font-size:clamp(15px,2.1vw,18px);line-height:1.62;color:#6b5d4f;max-width:46ch;margin:0 0 clamp(28px,3.4vw,40px);">The Bean Matcher pairs you with a single coffee from independent roasters — matched to how you actually drink, then refined with every cup. Be first through the door.</p>
+        <div style="display:flex;align-items:center;gap:clamp(14px,2.2vw,24px);flex-wrap:wrap;">
+          <button onclick="document.getElementById('prelaunch-name').focus()" style="padding:clamp(13px,1.8vw,16px) clamp(22px,3vw,32px);background:#6f4e37;color:#fbf7f1;border:none;border-radius:6px;font-family:'Hanken Grotesk',sans-serif;font-size:clamp(14px,1.9vw,15px);font-weight:600;letter-spacing:0.02em;transition:background .18s ease;" onmouseover="this.style.background='#573c2a'" onmouseout="this.style.background='#6f4e37'">Register your interest</button>
+          <span style="font-size:clamp(12px,1.8vw,14px);color:#8a7a68;">Join the early-access list to stay updated</span>
+        </div>
+      </div>
+      <div class="hero-pattern">
+        <span style="font-family:'Courier New',monospace;font-size:clamp(9px,1.4vw,12px);letter-spacing:0.05em;color:#a0917f;background:rgba(244,236,226,0.7);padding:5px 10px;border-radius:4px;text-align:center;">image — slow pour</span>
+      </div>
+    </section>
+
+    <!-- WHAT IT IS -->
+    <section style="width:100%;max-width:920px;margin:0 auto;padding:clamp(56px,8vw,80px) clamp(20px,5vw,48px) clamp(16px,3vw,24px);text-align:center;">
+      <span style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(10px,1.6vw,12px);font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#a87c4f;">What is The Bean Matcher?</span>
+      <p style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(22px,3.4vw,38px);line-height:1.4;letter-spacing:-0.005em;color:#3a2f25;margin:20px auto 0;max-width:24ch;text-wrap:balance;">A coffee matchmaker. Answer a few honest questions about your taste, and we find the one bean — from small, sustainable, ethical roasters — worth getting excited about.</p>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section style="width:100%;max-width:760px;margin:0 auto;padding:clamp(40px,6vw,56px) clamp(20px,5vw,48px) clamp(56px,8vw,72px);">
+      <div style="text-align:center;margin-bottom:clamp(32px,5vw,48px);">
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(10px,1.6vw,12px);font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#a87c4f;">How it works</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(26px,4.2vw,44px);letter-spacing:-0.01em;margin:12px 0 0;">Three steps to your match.</h2>
+      </div>
+
+      <!-- Step 1 -->
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,3vw,24px);padding-left:clamp(24px,4vw,34px);margin-left:clamp(20px,3vw,23px);border-left:2px solid rgba(111,78,55,0.2);padding-bottom:30px;position:relative;">
+        <div style="position:absolute;left:clamp(-24px,-3.9vw,-25px);top:0;width:clamp(40px,6vw,48px);height:clamp(40px,6vw,48px);border-radius:50%;background:#6f4e37;color:#fbf7f1;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(18px,2.8vw,22px);">1</div>
+        <div style="grid-column:2;">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(20px,3vw,24px);line-height:1.1;margin:0 0 6px;">Tell us your taste</h3>
+          <p style="font-size:clamp(14px,2vw,15.5px);line-height:1.6;color:#6b5d4f;margin:0;">A few quick questions about the flavours you love, how you brew, and how you take your coffee.</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,3vw,24px);padding-left:clamp(24px,4vw,34px);margin-left:clamp(20px,3vw,23px);border-left:2px solid rgba(111,78,55,0.2);padding-bottom:30px;position:relative;">
+        <div style="position:absolute;left:clamp(-24px,-3.9vw,-25px);top:0;width:clamp(40px,6vw,48px);height:clamp(40px,6vw,48px);border-radius:50%;background:#6f4e37;color:#fbf7f1;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(18px,2.8vw,22px);">2</div>
+        <div style="grid-column:2;">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(20px,3vw,24px);line-height:1.1;margin:0 0 6px;">Meet your match</h3>
+          <p style="font-size:clamp(14px,2vw,15.5px);line-height:1.6;color:#6b5d4f;margin:0;">We read your palate and pair you with a single bean from our independent roasting partners.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,3vw,24px);padding-left:clamp(24px,4vw,34px);margin-left:clamp(20px,3vw,23px);border-left:2px solid transparent;padding-bottom:0;position:relative;">
+        <div style="position:absolute;left:clamp(-24px,-3.9vw,-25px);top:0;width:clamp(40px,6vw,48px);height:clamp(40px,6vw,48px);border-radius:50%;background:#6f4e37;color:#fbf7f1;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(18px,2.8vw,22px);">3</div>
+        <div style="grid-column:2;">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(20px,3vw,24px);line-height:1.1;margin:0 0 6px;">Delivered &amp; refined</h3>
+          <p style="font-size:clamp(14px,2vw,15.5px);line-height:1.6;color:#6b5d4f;margin:0;">Freshly roasted to your door — then we sharpen the match with every cup you review.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTER INTEREST FORM -->
+    <section style="background:#241c15;color:#f4ece2;">
+      <div style="width:100%;max-width:560px;margin:0 auto;padding:clamp(56px,8vw,80px) clamp(20px,5vw,48px);text-align:center;">
+
+        <!-- FORM STATE -->
+        <div id="form-state" style="animation:fadeUp .5s ease both;">
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#d9a566;">Be first in line</span>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(28px,4.4vw,48px);line-height:1.06;letter-spacing:-0.012em;margin:14px 0 14px;color:#fbf7f1;">Register your interest.</h2>
+          <p style="font-size:clamp(15px,2.1vw,17px);line-height:1.6;color:#c3b6a4;margin:0 0 clamp(28px,4vw,36px);max-width:46ch;margin-left:auto;margin-right:auto;">Leave your details and we'll let you know the moment we open.</p>
+
+          <div style="display:flex;flex-direction:column;gap:16px;text-align:left;">
+
+            <!-- Error message -->
+            <div id="form-error" style="display:none;background:rgba(161,44,123,0.15);border:1px solid rgba(161,44,123,0.4);border-radius:7px;padding:12px 16px;font-size:14px;color:#e8a0cf;text-align:center;"></div>
+
+            <div>
+              <label for="prelaunch-name" style="display:block;font-size:13px;font-weight:500;letter-spacing:0.02em;color:#c3b6a4;margin-bottom:8px;">Name</label>
+              <input id="prelaunch-name" type="text" placeholder="Your name" style="width:100%;padding:15px 17px;border:1px solid rgba(244,236,226,0.22);border-radius:7px;font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:#f4ece2;background:rgba(244,236,226,0.06);">
+            </div>
+
+            <div>
+              <label for="prelaunch-email" style="display:block;font-size:13px;font-weight:500;letter-spacing:0.02em;color:#c3b6a4;margin-bottom:8px;">Email</label>
+              <input id="prelaunch-email" type="email" placeholder="you@email.com" style="width:100%;padding:15px 17px;border:1px solid rgba(244,236,226,0.22);border-radius:7px;font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:#f4ece2;background:rgba(244,236,226,0.06);">
+            </div>
+
+            <button id="roaster-btn" onclick="toggleRoaster()" style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:14px 16px;border-radius:8px;cursor:pointer;transition:all .15s ease;font-family:'Hanken Grotesk',sans-serif;border:1px solid rgba(244,236,226,0.22);background:rgba(244,236,226,0.04);">
+              <span id="roaster-box" style="flex:none;width:22px;height:22px;border-radius:5px;border:1px solid rgba(244,236,226,0.4);background:transparent;color:#241c15;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;"></span>
+              <span style="font-size:15px;color:#f4ece2;line-height:1.4;">I'm a roaster interested in partnering</span>
+            </button>
+
+            <div>
+              <label for="prelaunch-notes" style="display:block;font-size:13px;font-weight:500;letter-spacing:0.02em;color:#c3b6a4;margin-bottom:8px;">Anything you'd like to tell us? <span style="color:#8a7c68;">(optional)</span></label>
+              <textarea id="prelaunch-notes" placeholder="A note, a question, or what you're hoping for…" style="width:100%;min-height:92px;padding:15px 17px;border:1px solid rgba(244,236,226,0.22);border-radius:7px;font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:#f4ece2;background:rgba(244,236,226,0.06);"></textarea>
+            </div>
+
+            <button id="submit-btn" onclick="submitForm()" style="margin-top:4px;padding:16px 26px;width:100%;background:#5a4a3a;color:#94836f;border:none;border-radius:7px;font-family:'Hanken Grotesk',sans-serif;font-size:15px;font-weight:600;letter-spacing:0.02em;cursor:not-allowed;transition:background .18s ease;">Notify me when you launch</button>
+          </div>
+          <p style="font-size:12.5px;color:#8a7c68;margin:16px 0 0;text-align:center;">We promise to only send you related emails — no spamming.</p>
+        </div>
+
+        <!-- THANK YOU STATE -->
+        <div id="thanks-state" style="display:none;animation:fadeUp .5s ease both;">
+          <div style="width:64px;height:64px;border-radius:50%;background:#6f4e37;color:#fbf7f1;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:30px;animation:popIn .5s ease both;">✓</div>
+          <h2 id="thanks-title" style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(32px,4vw,48px);line-height:1.06;letter-spacing:-0.012em;margin:0 0 14px;color:#fbf7f1;"></h2>
+          <p id="thanks-body" style="font-size:17px;line-height:1.62;color:#c3b6a4;margin:0 0 8px;max-width:46ch;margin-left:auto;margin-right:auto;"></p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="background:#1c1610;color:#e8ded2;padding:40px clamp(24px,5vw,48px);">
+    <div style="max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <div style="display:inline-flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:16px;letter-spacing:0.16em;text-transform:uppercase;color:#fbf7f1;">
+        <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M6.5 13 H23 v5.5 a7 7 0 0 1 -7 7 h-2.5 a7 7 0 0 1 -7 -7 z" stroke="#fbf7f1" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M23 14.5 h2.5 a3.5 3.5 0 0 1 0 7 H23" stroke="#fbf7f1" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M12 4 q-2 2 0 4 M16 3.5 q-2 2 0 4 M20 4 q-2 2 0 4" stroke="#c9a06a" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        The Bean Matcher
+      </div>
+      <span style="font-size:13px;color:#7d7060;">© 2026 The Bean Matcher</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  let isRoaster = false;
+
+  function toggleRoaster() {
+    isRoaster = !isRoaster;
+    const btn = document.getElementById('roaster-btn');
+    const box = document.getElementById('roaster-box');
+    btn.style.border     = isRoaster ? '1px solid #d9a566' : '1px solid rgba(244,236,226,0.22)';
+    btn.style.background = isRoaster ? 'rgba(217,165,102,0.12)' : 'rgba(244,236,226,0.04)';
+    box.style.border     = isRoaster ? '1px solid #d9a566' : '1px solid rgba(244,236,226,0.4)';
+    box.style.background = isRoaster ? '#d9a566' : 'transparent';
+    box.textContent      = isRoaster ? '✓' : '';
+  }
+
+  const emailInput = document.getElementById('prelaunch-email');
+  const submitBtn  = document.getElementById('submit-btn');
+
+  function updateSubmitState() {
+    const valid = /.+@.+\..+/.test(emailInput.value.trim());
+    submitBtn.style.background = valid ? '#d9a566' : '#5a4a3a';
+    submitBtn.style.color      = valid ? '#241c15' : '#94836f';
+    submitBtn.style.cursor     = valid ? 'pointer'  : 'not-allowed';
+  }
+
+  emailInput.addEventListener('input', updateSubmitState);
+  emailInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') submitForm();
+  });
+
+  async function submitForm() {
+    const email = document.getElementById('prelaunch-email').value.trim();
+    const name  = document.getElementById('prelaunch-name').value.trim();
+    const notes = document.getElementById('prelaunch-notes').value.trim();
+
+    if (!/.+@.+\..+/.test(email)) return;
+
+    submitBtn.textContent  = 'Saving…';
+    submitBtn.style.cursor = 'not-allowed';
+
+    const { error } = await sb.from('waitlist').insert({
+      name:       name  || null,
+      email:      email,
+      is_roaster: isRoaster,
+      notes:      notes || null,
+      source:     'prelaunch'
+    });
+
+    if (error) {
+      submitBtn.textContent = 'Notify me when you launch';
+      updateSubmitState();
+      const errEl = document.getElementById('form-error');
+      errEl.textContent   = error.code === '23505'
+        ? "You're already on the list — we'll be in touch!"
+        : 'Something went wrong. Please try again.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    const first     = name ? ', ' + name.split(' ')[0].replace(/^./, c => c.toUpperCase()) : '';
+    const thankTitle = isRoaster ? "Let's talk coffee." : "You're on the list.";
+    const thankBody  = isRoaster
+      ? "We've noted you're a roaster interested in partnering — our team will reach out personally to explore working together. You'll be among the first to know when The Bean Matcher opens."
+      : `Thanks${first} — we've saved ${email}. You'll be among the first to know when The Bean Matcher opens, with an early-access invite waiting for you.`;
+
+    document.getElementById('thanks-title').textContent  = thankTitle;
+    document.getElementById('thanks-body').textContent   = thankBody;
+    document.getElementById('form-state').style.display  = 'none';
+    document.getElementById('thanks-state').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
